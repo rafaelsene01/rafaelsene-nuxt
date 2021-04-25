@@ -3,6 +3,10 @@
     <div>
       <Logo />
       <h1 class="title">rafaelsene-nuxt</h1>
+
+      <sn-locales />
+
+      {{ $t('home') }}
       <div class="links">
         <a
           href="https://nuxtjs.org/"
