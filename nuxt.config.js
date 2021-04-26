@@ -88,4 +88,6 @@ export default {
   alias: {
     '@images': resolve(__dirname, './assets/images'),
   },
+
+  serverMiddleware: [{ path: '/socket/api', handler: '~/api/srv.js' }],
 }
