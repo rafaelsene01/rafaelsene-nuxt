@@ -104,5 +104,5 @@ export default {
     '@images': resolve(__dirname, './assets/images'),
   },
 
-  serverMiddleware: ['~/serverMiddleware/socket-io-server.js'],
+  serverMiddleware: ['~/server-middleware/socket-io-server.js'],
 }
