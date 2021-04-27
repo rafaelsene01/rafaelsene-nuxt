@@ -14,7 +14,7 @@ export default Vue.extend({
   data(): any {
     return {
       socket: null,
-      clientsCount: 'aa',
+      clientsCount: '',
     }
   },
 

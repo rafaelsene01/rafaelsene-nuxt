@@ -47,7 +47,9 @@ export default {
       {
         default: true, // make this the default socket
         name: 'main', // give it a name that we can later use to choose this socket in the .vue file
-        url: `${process.env.VERCEL_URL}:3001`, // URL wherever your socket IO server runs
+        url: `${
+          process.env.VERCEL_URL ? process.env.VERCEL_URL : 'http://localhost'
+        }:3001`, // URL wherever your socket IO server runs
       },
     ],
   },
