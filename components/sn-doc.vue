@@ -1,6 +1,6 @@
 <template>
   <div class="h-full w-full flex flex-col">
-    <body>
+    <client-only class="ace_editor">
       <AceEditor
         ref="ace"
         v-model="content"
@@ -16,35 +16,60 @@
         }"
         @init="editorInit"
       />
-    </body>
-    <footer>
-      <span>aa</span>
-    </footer>
+
+      <footer>
+        <span>aa</span>
+      </footer>
+    </client-only>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
-type DataType = {
-  content: string
-}
-
 export default Vue.extend({
   name: 'DocComponent',
 
-  data: (): DataType => {
+  data: (): any => {
     return {
       content: '',
+      socket: null,
+      live: false,
     }
   },
 
-  mounted() {
-    // const editor = (this.$refs.ace as any).editor
-    // editor.setOptions({
-    //   fontSize: '18pt',
-    // })
+  watch: {
+    content() {
+      if (!this.live) {
+        this.socket.emit('text', this.content)
+      }
+    },
   },
+
+  mounted() {
+    const { doc } = this.$route.params
+
+    this.socket = this.$nuxtSocket({
+      name: 'main',
+      query: {
+        doc,
+      },
+    })
+
+    this.socket.on('text', (data: any) => {
+      if (this.socket.id !== data.id) {
+        this.live = true
+        this.content = data.msg
+      }
+    })
+  },
+
+  // mounted() {
+  //   // const editor = (this.$refs.ace as any).editor
+  //   // editor.setOptions({
+  //   //   fontSize: '18pt',
+  //   // })
+  // },
 
   methods: {
     editorInit() {
@@ -60,12 +85,12 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="postcss">
-body,
+.ace_editor,
 footer {
   @apply flex w-full;
 }
 
-body {
+.ace_editor {
   @apply flex-1;
 }
 

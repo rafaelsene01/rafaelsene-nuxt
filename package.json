@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "nuxt": "^2.15.3",
     "nuxt-i18n": "^6.26.0",
+    "nuxt-socket-io": "^1.1.17",
     "socket.io": "^4.0.1",
     "socket.io-client": "^4.0.1",
     "vue2-ace-editor": "^0.0.15"
